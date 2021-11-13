@@ -1,0 +1,124 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/MainMenu.tres" type="DynamicFont" id=1]
+[ext_resource path="res://PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://PauseMenuBackground.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/RandomBoys-4BW7l.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/Tutorial.tres" type="DynamicFont" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 100.0
+margin_right = -100.0
+margin_bottom = -100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 1240.0
+margin_bottom = 700.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 1240.0
+margin_bottom = 418.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "paused"
+align = 1
+valign = 1
+
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 422.0
+margin_right = 1240.0
+margin_bottom = 512.0
+focus_next = NodePath("../Help")
+custom_fonts/font = ExtResource( 1 )
+text = "Continue"
+
+[node name="Help" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 516.0
+margin_right = 1240.0
+margin_bottom = 606.0
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Continue")
+custom_fonts/font = SubResource( 1 )
+text = "Help"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 610.0
+margin_right = 1240.0
+margin_bottom = 700.0
+focus_previous = NodePath("../Help")
+custom_fonts/font = ExtResource( 1 )
+text = "Quit"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 488.0
+margin_right = 1240.0
+margin_bottom = 565.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "
+Surprise! Secret Map!"
+align = 1
+valign = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 569.0
+margin_right = 1240.0
+margin_bottom = 659.0
+custom_fonts/font = ExtResource( 1 )
+text = "Test Map"
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 663.0
+margin_right = 1240.0
+margin_bottom = 700.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Beware! You'll lose all your game progress if you click here."
+align = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Help" to="." method="_on_Help_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

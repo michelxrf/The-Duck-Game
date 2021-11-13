@@ -1,0 +1,133 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Sprites/Enemies/Boss/Boss.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Boss/BossDying.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Roar.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/dead.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/Hit.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/Spawn.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Boss.gd" type="Script" id=7]
+[ext_resource path="res://BasicBug.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 700, 700 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 700, 700 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 700, 0, 700, 700 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 700, 700, 700 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 700, 700, 700, 700 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": false,
+"name": "Dying",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 57.7501
+
+[node name="Boss" type="RigidBody2D" groups=[
+"boss",
+"wall",
+]]
+z_index = 5
+collision_layer = 3
+collision_mask = 3
+mass = 1000.0
+contacts_reported = 10
+contact_monitor = true
+linear_damp = 5.0
+script = ExtResource( 7 )
+Small_Enemy = ExtResource( 8 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="DamagedTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="DieTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 6 )
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 2, 2 )
+polygon = PoolVector2Array( 42, 74, 92, 93, 156, 137.5, 186.137, 121.028, 197.249, 136.109, 232.965, 153.57, 219.472, 134.521, 193.28, 113.885, 212.329, 69.4378, 223.441, 44.0393, 275.031, 55.1512, 287.731, 66.263, 281.381, 48.8015, 248.839, 36.896, 225.822, 34.5149, 234.553, -0.407875, 231.378, -23.4252, 225.028, -35.3307, 254.395, -39.2993, 271.063, -46.4426, 287.731, -64.6977, 277.413, -62.3166, 245.665, -50.4111, 221.06, -49.6174, 221.06, -61.5229, 212.329, -76.6032, 192.487, -112.32, 210.742, -129.781, 231.378, -151.211, 203.598, -138.512, 183.756, -118.669, 169.469, -130.575, 133.753, -144.861, 94.0678, -152.005, 58.3513, -167.085, 29.7781, -178.197, 5.17334, -190.896, -5.14476, -190.896, -37.6865, -173.435, -74.9904, -159.942, -103.564, -148.83, -156.742, -137.718, -186.902, -121.05, -197.22, -135.337, -232.143, -152.798, -217.857, -136.131, -194.839, -107.557, -209.92, -70.2535, -221.031, -47.2362, -260.716, -53.5858, -287.702, -65.4913, -278.972, -50.411, -260.716, -42.474, -233.731, -34.537, -225, -34.537, -232.143, -13.9008, -233.731, 5.14799, -229.762, 25.7842, -226.587, 32.9275, -251.192, 36.1023, -279.765, 48.8015, -287.702, 63.8818, -275.797, 61.5007, -255.161, 52.77, -224.206, 48.0078, -221.031, 59.1196, -208.332, 73.4062, -200.395, 96.4235, -194.839, 114.679, -221.031, 135.315, -230.556, 150.395, -207.538, 139.283, -186.109, 123.409, -157.535, 137.696, -106, 98.5, -70.5, 85, -33.5, 72.5, 6, 73 )
+
+[node name="SpawnPoint0" type="Position2D" parent="."]
+position = Vector2( -441.19, 167.805 )
+
+[node name="SpawnPoint1" type="Position2D" parent="."]
+position = Vector2( 443.621, 175.561 )
+
+[node name="SpawnPoint2" type="Position2D" parent="."]
+position = Vector2( 454.947, -168.01 )
+
+[node name="SpawnPoint3" type="Position2D" parent="."]
+position = Vector2( -453.06, -168.01 )
+
+[node name="Face" type="Area2D" parent="." groups=[
+"enemy",
+]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Face"]
+position = Vector2( 0, 315.254 )
+shape = SubResource( 7 )
+
+[node name="Roar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="Pain" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="Dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="RoarTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_Boss_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="DamagedTimer" to="." method="_on_DamagedTimer_timeout"]
+[connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]
+[connection signal="body_entered" from="Face" to="." method="_on_Face_body_entered"]
+[connection signal="timeout" from="RoarTimer" to="." method="_on_RoarTimer_timeout"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://GUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameOverScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Duck.tscn" type="PackedScene" id=5]
+[ext_resource path="res://LoadingScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://HelpScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sounds/menuclick.mp3" type="AudioStream" id=8]
+[ext_resource path="res://PauseMenuBackground.png" type="Texture" id=9]
+
+[node name="World" type="Node"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 3043.0
+margin_bottom = 1832.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource( 4 )]
+
+[node name="HelpScreen" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+
+[node name="LoadingScreen" parent="CanvasLayer" instance=ExtResource( 6 )]
+
+[node name="MenuSound" type="AudioStreamPlayer" parent="CanvasLayer"]
+stream = ExtResource( 8 )
+volume_db = -20.0
+
+[node name="Duck" parent="." instance=ExtResource( 5 )]
+pause_mode = 1
+z_index = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+pause_mode = 1
+volume_db = -18.0
+
+[connection signal="finished" from="BGM" to="." method="_on_BGM_finished"]

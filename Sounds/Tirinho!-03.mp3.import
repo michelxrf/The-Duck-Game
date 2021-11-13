@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Tirinho!-03.mp3-34ee22dec0245bce6b6391b67ea46a58.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Tirinho!-03.mp3"
+dest_files=[ "res://.import/Tirinho!-03.mp3-34ee22dec0245bce6b6391b67ea46a58.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

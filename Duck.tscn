@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Sprites/Duck/Duck_Moving.png" type="Texture" id=1]
+[ext_resource path="res://Duck.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/SpeechBubble_BubbleOnly.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/SpeechBubble_ArrowOnly.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/SwitchGunIcon.png" type="Texture" id=5]
+[ext_resource path="res://Sounds/OrangeJuice.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Sprites/Lights/light.png" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 128, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 36.1592
+height = 9.5096
+
+[node name="Duck" type="KinematicBody2D" groups=[
+"player",
+]]
+visible = false
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 5 )
+frame = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.83156, -2.28882e-05 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.25, 1.25 )
+
+[node name="Speech" type="Node2D" parent="."]
+visible = false
+position = Vector2( 83.2679, -36.1895 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="SpeechArrow" type="Sprite" parent="Speech"]
+position = Vector2( -7.10896, -4.86401 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpeechBubble" type="Sprite" parent="Speech"]
+position = Vector2( -1.11235, -4.22697 )
+scale = Vector2( 0.881812, 1.42943 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Speech/SpeechBubble"]
+position = Vector2( -0.788166, 0.529171 )
+scale = Vector2( 1.13403, 0.699582 )
+texture = ExtResource( 5 )
+
+[node name="SwitchWeaponTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Muzzle" type="Position2D" parent="."]
+position = Vector2( 60, 0 )
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="ShieldRateTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="DamagedTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="OrangeJuiceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -5.0
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 7 )
+texture_scale = 5.0
+shadow_enabled = true
+
+[connection signal="timeout" from="SwitchWeaponTimer" to="." method="_on_SwitchWeaponTimer_timeout"]
+[connection signal="timeout" from="DamagedTimer" to="." method="_on_DamagedTimer_timeout"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/MainMenu.tres" type="DynamicFont" id=1]
+[ext_resource path="res://MapExit.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 96 )
+
+[node name="MapExit" type="Area2D"]
+position = Vector2( 1217.27, 416.458 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -127.0
+margin_top = -100.0
+margin_right = 126.0
+margin_bottom = 95.0
+custom_fonts/font = ExtResource( 1 )
+text = "NEXT LEVEL
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="." to="." method="_on_MapExit_body_entered"]

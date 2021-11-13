@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/Projectiles/Laser.png" type="Texture" id=1]
+[ext_resource path="res://Laser.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 3.68788
+height = 16.5382
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 6.29637
+
+[node name="Laser" type="RigidBody2D" groups=[
+"projectile",
+]]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+continuous_cd = 1
+contacts_reported = 10
+contact_monitor = true
+can_sleep = false
+linear_damp = 0.0
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.67254, -0.131981 )
+rotation = 1.5708
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpearHead" type="Area2D" parent="."]
+gravity_vec = Vector2( 0, 0 )
+linear_damp = 0.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpearHead"]
+position = Vector2( 9.93982, -0.139839 )
+rotation = 1.5708
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 6.59446, -0.280609 )
+scale = Vector2( 1.23852, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="." to="." method="_on_Laser_body_entered"]
+[connection signal="body_entered" from="SpearHead" to="." method="_on_SpearHead_body_entered"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

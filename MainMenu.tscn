@@ -1,0 +1,226 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Fonts/RandomBoys-4BW7l.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Sprites/Duck/Duck_Moving.png" type="Texture" id=2]
+[ext_resource path="res://MainMenu.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/MainMenu.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Music/Menu.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/menuclick.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Fonts/LegendumRegular-PvV2.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://GraySquare.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 26
+font_data = ExtResource( 7 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="MainMenu" type="MarginContainer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 100.0
+margin_right = -100.0
+margin_bottom = -100.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1240.0
+margin_bottom = 700.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 539.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_right = 539.0
+margin_bottom = 130.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.956863, 1, 0, 1 )
+text = "The Duck Game"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Options" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 134.0
+margin_right = 539.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StartGame" type="Button" parent="HBoxContainer/VBoxContainer/Options"]
+margin_top = 118.0
+margin_right = 539.0
+margin_bottom = 208.0
+focus_neighbour_bottom = NodePath("../CS50 Project Link")
+focus_next = NodePath("../CS50 Project Link")
+custom_fonts/font = SubResource( 2 )
+text = "Start"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Credits" type="Button" parent="HBoxContainer/VBoxContainer/Options"]
+margin_top = 238.0
+margin_right = 539.0
+margin_bottom = 328.0
+focus_neighbour_top = NodePath("../CS50 Project Link")
+focus_neighbour_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../CS50 Project Link")
+custom_fonts/font = ExtResource( 4 )
+text = "Credits"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Quit" type="Button" parent="HBoxContainer/VBoxContainer/Options"]
+margin_top = 358.0
+margin_right = 539.0
+margin_bottom = 448.0
+focus_neighbour_top = NodePath("../Credits")
+focus_previous = NodePath("../Credits")
+custom_fonts/font = ExtResource( 4 )
+text = "Quit"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Container" type="CenterContainer" parent="HBoxContainer"]
+margin_left = 543.0
+margin_right = 889.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 893.0
+margin_right = 1240.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Container" type="CenterContainer" parent="HBoxContainer/VBoxContainer2"]
+margin_right = 347.0
+margin_bottom = 348.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+margin_top = 352.0
+margin_right = 347.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 3 )
+text = "     Hello! I'm Michel R. Fonseca.
+
+     I've made this game as final project for the Harvard's CS50x course.
+	
+	Enjoy!"
+align = 3
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer2"]
+position = Vector2( 159.028, 94.9904 )
+rotation = 2.83791
+scale = Vector2( 2, 2 )
+frames = SubResource( 8 )
+frame = 3
+playing = true
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+autoplay = true
+
+[node name="MenuSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -20.0
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Options/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Options/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Options/Quit" to="." method="_on_Quit_pressed"]

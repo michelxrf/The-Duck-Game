@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/GUI/Square.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/GUI/HealthBarBackground.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/GUI/HealthBarFill.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/GUI/HealthBarOver.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/RandomBoys-4BW7l.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://GUI.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[node name="GUI" type="Control" groups=[
+"gui",
+]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 1.5, 1.5 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+playback_speed = 0.5
+playback/speed = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.8, 0.8 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentWeapon" type="NinePatchRect" parent="HBoxContainer"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponSprite" type="TextureRect" parent="HBoxContainer/CurrentWeapon"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.8128
+margin_right = -4.81282
+margin_bottom = 64.0
+rect_rotation = -45.0
+rect_scale = Vector2( 1.5, 1.5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 104.0
+margin_right = 604.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HealthBar" type="TextureProgress" parent="HBoxContainer/VBoxContainer"]
+margin_right = 500.0
+margin_bottom = 70.0
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HealthNumber" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 74.0
+margin_right = 500.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 1 )
+text = "100/100"
+align = 3
+__meta__ = {
+"_edit_lock_": true
+}

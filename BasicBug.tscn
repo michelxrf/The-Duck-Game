@@ -1,0 +1,187 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Sprites/Enemies/Bug1/Round_Bug_Idle.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Bug1/Round_Bug_Moving.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Bug1/Round_Bug_Dead.png" type="Texture" id=3]
+[ext_resource path="res://Sounds/beep.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Bug.gd" type="Script" id=5]
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 256, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 320, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "Dying",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "Moving",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 18.2517
+
+[sub_resource type="CircleShape2D" id=23]
+radius = 350.0
+
+[sub_resource type="CircleShape2D" id=24]
+radius = 200.0
+
+[node name="BasicBug" type="RigidBody2D" groups=[
+"enemy",
+]]
+physics_material_override = SubResource( 1 )
+contacts_reported = 3
+contact_monitor = true
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 21 )
+animation = "Idle"
+frame = 2
+playing = true
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource( 22 )
+
+[node name="Vision" type="Area2D" parent="."]
+visible = false
+gravity_vec = Vector2( 0, 0 )
+monitorable = false
+collision_mask = 0
+
+[node name="VisionCollision" type="CollisionShape2D" parent="Vision"]
+shape = SubResource( 23 )
+
+[node name="DamagedTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="DeadTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="NewTarget" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Brake_Zone" type="Area2D" parent="."]
+gravity_vec = Vector2( 0, 0 )
+monitorable = false
+collision_mask = 0
+
+[node name="Brake_Collision" type="CollisionShape2D" parent="Brake_Zone"]
+visible = false
+shape = SubResource( 24 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[connection signal="body_entered" from="." to="." method="_on_BasicBug_body_entered"]
+[connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
+[connection signal="timeout" from="DamagedTimer" to="." method="_on_DamagedTimer_timeout"]
+[connection signal="timeout" from="DeadTimer" to="." method="_on_DeadTimer_timeout"]
+[connection signal="timeout" from="NewTarget" to="." method="_on_NewTarget_timeout"]
+[connection signal="body_exited" from="Brake_Zone" to="." method="_on_Brake_Zone_body_exited"]

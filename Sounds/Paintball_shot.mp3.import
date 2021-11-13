@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Paintball_shot.mp3-903f35bfa8f972532a711b9169947d16.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Paintball_shot.mp3"
+dest_files=[ "res://.import/Paintball_shot.mp3-903f35bfa8f972532a711b9169947d16.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

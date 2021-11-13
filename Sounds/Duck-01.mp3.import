@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Duck-01.mp3-f2e7a09ef10902b2607f5d8cbd1a387e.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Duck-01.mp3"
+dest_files=[ "res://.import/Duck-01.mp3-f2e7a09ef10902b2607f5d8cbd1a387e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

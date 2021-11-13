@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://WinScreen.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/MainMenu.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Sounds/Win.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Sprites/Duckument.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/Tutorial.tres" type="DynamicFont" id=5]
+
+[node name="WinScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 100.0
+margin_right = -100.0
+margin_bottom = -100.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -45.0
+margin_top = 24.0
+margin_right = 736.0
+margin_bottom = 796.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+margin_left = 691.353
+margin_top = 2.71826
+margin_right = 1214.35
+margin_bottom = 773.718
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 5 )
+text = "Congratulations Duck!
+
+You've made it! You're now a certified Debugging duck. And now can help coders all around the world.
+
+Stay strong and remember to drink orange juice!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -443.98
+margin_top = -336.282
+margin_right = 449.02
+margin_bottom = -243.282
+custom_fonts/font = ExtResource( 2 )
+text = "Leave"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+autoplay = true
+
+[connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
